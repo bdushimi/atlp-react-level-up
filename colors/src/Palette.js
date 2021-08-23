@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Navbar from './Navbar';
 import ColorBox from './colorBox';
 import "./Palette.css";
+import { computeHeadingLevel } from '@testing-library/react';
 
 
 class Palette extends Component {
@@ -9,9 +10,11 @@ class Palette extends Component {
         super(props);
         this.state = {
             level: 500,
+            format: "hex",
         }
 
         this.changeLevel = this.changeLevel.bind(this);
+        this.changeFormat = this.changeFormat.bind(this);
     }
     
 
@@ -19,19 +22,23 @@ class Palette extends Component {
         this.setState({ level });
     }
 
+    changeFormat = (value) => {
+        this.setState({ format: value });
+    }
+
 
     render() {
 
-        const { level } = this.state;
+        const { level, format } = this.state;
         const { colors } = this.props.palette;
 
         const colorBoxes = colors[level].map((color, index) => (
-            <ColorBox background={color.hex} key={index} name={ color.name }/>
+            <ColorBox background={color[format]} key={index} name={ color.name }/>
         ));
 
         return (
             <div className="Palette">
-                <Navbar level={level} changeLevel={ this.changeLevel}/>
+                <Navbar level={level} changeLevel={this.changeLevel} handleOnChange={this.changeFormat}/>
                 
                 <div className="Palette-colors">
                     {colorBoxes}
