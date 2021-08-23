@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Navbar from './Navbar';
 import ColorBox from './colorBox';
 import "./Palette.css";
-import { computeHeadingLevel } from '@testing-library/react';
+
 
 
 class Palette extends Component {
