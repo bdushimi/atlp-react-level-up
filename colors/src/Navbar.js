@@ -17,10 +17,10 @@ export default class Navbar extends Component {
             open: false,
         }
 
-        this.handleChange = this.handleChange.bind(this)
+        this.handleFormatChange = this.handleFormatChange.bind(this)
     }
 
-    handleChange(event) {
+    handleFormatChange(event) {
         this.setState({
             format: event.target.value,
             open: true,
@@ -59,7 +59,7 @@ export default class Navbar extends Component {
                     </div>
                 </div>
                 <div className="select-container">
-                    <Select value={format} onChange={this.handleChange}>
+                    <Select value={format} onChange={this.handleFormatChange}>
                         <MenuItem value="hex">HEX - #ffffff</MenuItem>
                         <MenuItem value="rgb">RGB - rgb(255,255,255)</MenuItem>
                         <MenuItem value="rgba">RGBA - rgba(255,255,255,1.0)</MenuItem>
@@ -69,12 +69,18 @@ export default class Navbar extends Component {
                     anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
                     open={open}
                     autoHideDuration={3000}
-                    message={<span id="message-id">Format Changed!</span>}
+                    message={<span id="message-id">Format Changed to { format.toUpperCase()}!</span>}
                     ContentProps={{
                         'aria-describedby': 'message-id',
                     }}
+                    onClose={this.closeSnackBar}
                     action={[
-                        <IconButton onClick={this.closeSnackBar}>
+                        <IconButton
+                            onClick={this.closeSnackBar}
+                            key="close"
+                            aria-label="Close"
+                            color="inherit"
+                        >
                             <CloseIcon />
                         </IconButton>,
                     ]}

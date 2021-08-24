@@ -31,7 +31,6 @@
 
 .rc-slider-step {
     background-color: transparent;
-
 }
 
 /* .rc-slider-rail {
@@ -47,4 +46,9 @@
     border: 2px solid green;
     box-shadow: none;
     width: 13px;
+}
+
+.select-container {
+    margin-left: auto;
+    margin-right: 1rem;
 }
