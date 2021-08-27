@@ -4,6 +4,13 @@ import seedColors from './seedColors';
 import { generatePalette} from "./colorsHelper";
 
 function App() {
+   
+  const findPalette = (id) => {
+    seedColors.find(palette => {
+      return palette.id === id;
+    })
+  }
+
   return (
     <Switch>
       <Route exact path="/" render={ () => <h1>PALETTE LIST GOES HERE</h1>}/>
