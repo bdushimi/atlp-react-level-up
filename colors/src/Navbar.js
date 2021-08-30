@@ -28,7 +28,7 @@ export default class Navbar extends Component {
         })
 
         this.props.handleOnChange(event.target.value);
-    
+
     }
 
     closeSnackBar = () => {
@@ -40,15 +40,15 @@ export default class Navbar extends Component {
 
     render() {
 
-        const { level, changeLevel} = this.props;
+        const { level, changeLevel, showColorLevel } = this.props;
         const { format, open } = this.state;
         return (
             <header className="Navbar">
                 <div className="logo">
                     <Link to="/">reactcolorpicker</Link>
                 </div>
-                <div className="slider-container">
-                    <span>Level: { level}</span>
+                {showColorLevel && (<div className="slider-container">
+                    <span>Level: {level}</span>
                     <div className="slider">
                         <Slider
                             defaultValue={level}
@@ -58,7 +58,7 @@ export default class Navbar extends Component {
                             onAfterChange={changeLevel}
                         />
                     </div>
-                </div>
+                </div>)}
                 <div className="select-container">
                     <Select value={format} onChange={this.handleFormatChange}>
                         <MenuItem value="hex">HEX - #ffffff</MenuItem>
@@ -70,7 +70,7 @@ export default class Navbar extends Component {
                     anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
                     open={open}
                     autoHideDuration={3000}
-                    message={<span id="message-id">Format Changed to { format.toUpperCase()}!</span>}
+                    message={<span id="message-id">Format Changed to {format.toUpperCase()}!</span>}
                     ContentProps={{
                         'aria-describedby': 'message-id',
                     }}
