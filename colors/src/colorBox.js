@@ -151,7 +151,7 @@ class colorBox extends Component {
 
 
     render() {
-        const { name, background, paletteId, id, showLink, classes, showFullPalette } = this.props;
+        const { name, background, paletteId, id, classes, showFullPalette } = this.props;
         const { copied } = this.state;
 
         return (
