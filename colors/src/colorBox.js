@@ -9,14 +9,27 @@ import { Link } from "react-router-dom";
 
 const styles = {
 
+    ColorBox: {
+        width: "20%",
+        height: props => props.showFullPalette ? "25%": "50%",
+        margin: "0 auto",
+        display: "inline-block",
+        position: "relative",
+        cursor: "pointer",
+        marginBottom: "3.5px",
+        "&:hover button": {
+            opacity: 1
+        }
+    },
+
     copyText: {
         color: props =>
-            chroma(props.background).luminance() >= 0.5 ? '#000' : '#fff'
+            chroma(props.background).luminance() >= 0.5 ? 'white' : 'black'
     },
 
     colorName: {
         color: props =>
-            chroma(props.background).luminance() <= 0.1 ? '#fff' : '#000'
+            chroma(props.background).luminance() <= 0.1 ? 'white' : 'black'
     },
     seeMore: {
         background: "rgba(255, 255, 255, 0.3)",
@@ -32,6 +45,25 @@ const styles = {
         textTransform: "uppercase",
         margin: "5px",
     },
+    copyButton: {
+        color: props =>
+            chroma(props.background).luminance() >= 0.5 ? 'black' : 'white',
+        width: "100px",
+        height: "30px",
+        position: "absolute",
+        display: "inline - block",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+        textAlign: "center",
+        outline: "none",
+        backgroundColor: "rgba(255, 255, 255, 0.3)",
+        fontSize: "1rem",
+        lineHeight: "30px",
+        textTransform: "uppercase",
+        border: "none",
+        opacity: 0
+    }
 
 
 
@@ -57,15 +89,12 @@ class colorBox extends Component {
 
 
     render() {
-        const { name, background, paletteId, id, showLink, classes } = this.props;
-        const { copied } = this.state
+        const { name, background, paletteId, id, showLink, classes, showFullPalette} = this.props;
+        const { copied } = this.state;
 
-
-        const isLight = chroma(background).luminance() >= 0.5;
-
-        ; return (
+        return (
             <CopyToClipboard text={background} onCopy={this.changeCopyState}>
-                <div style={{ background }} className="ColorBox">
+                <div style={{ background }} className={ classes.ColorBox}>
                     <div style={{ background }}
                         className={`copy-overlay ${copied && "show"}`}>
 
@@ -79,9 +108,9 @@ class colorBox extends Component {
                             <span className={classes.colorName}>{name}</span>
                         </div>
 
-                        <button className={`copy-button ${classes.copyText}`}>Copy</button>
+                        <button className={classes.copyButton}>Copy</button>
                     </div>
-                    {showLink &&
+                    {showFullPalette &&
                         <Link to={`/palette/${paletteId}/${id}`}
                             onClick={e => e.stopPropagation()}>
                             <span className={classes.seeMore}>More</span>
