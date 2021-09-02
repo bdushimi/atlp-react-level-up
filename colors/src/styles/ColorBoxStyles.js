@@ -17,7 +17,7 @@ const styles = {
 
     copyText: {
         color: props =>
-            chroma(props.background).luminance() >= 0.5 ? 'white' : 'black'
+            chroma(props.background).luminance() >= 0.5 ? 'black' : 'white'
     },
 
     colorName: {

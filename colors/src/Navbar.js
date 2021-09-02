@@ -5,11 +5,14 @@ import Snackbar from "@material-ui/core/Snackbar"
 import IconButton from "@material-ui/core/IconButton"
 import CloseIcon from "@material-ui/icons/Close"
 import 'rc-slider/assets/index.css';
-import "./Navbar.css";
 import Slider from 'rc-slider';
 import { Link } from "react-router-dom";
+import { withStyles } from '@material-ui/core/styles';
+import styles from "./styles/NavbarStyles";
 
-export default class Navbar extends Component {
+
+
+class Navbar extends Component {
 
     constructor(props) {
         super(props);
@@ -40,16 +43,16 @@ export default class Navbar extends Component {
 
     render() {
 
-        const { level, changeLevel, showColorLevel } = this.props;
+        const { level, changeLevel, showColorLevel, classes } = this.props;
         const { format, open } = this.state;
         return (
-            <header className="Navbar">
-                <div className="logo">
+            <header className={classes.Navbar}>
+                <div className={classes.logo}>
                     <Link to="/">reactcolorpicker</Link>
                 </div>
-                {showColorLevel && (<div className="slider-container">
+                {showColorLevel && (<div>
                     <span>Level: {level}</span>
-                    <div className="slider">
+                    <div className={classes.slider}>
                         <Slider
                             defaultValue={level}
                             min={100}
@@ -59,7 +62,7 @@ export default class Navbar extends Component {
                         />
                     </div>
                 </div>)}
-                <div className="select-container">
+                <div className={ classes.selectContainer}>
                     <Select value={format} onChange={this.handleFormatChange}>
                         <MenuItem value="hex">HEX - #ffffff</MenuItem>
                         <MenuItem value="rgb">RGB - rgb(255,255,255)</MenuItem>
@@ -90,3 +93,5 @@ export default class Navbar extends Component {
         )
     }
 }
+
+export default withStyles(styles)(Navbar);
