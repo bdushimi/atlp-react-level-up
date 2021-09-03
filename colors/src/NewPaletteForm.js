@@ -76,7 +76,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function NewPaletteForm() {
+export default function NewPaletteForm(props) {
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = useState(false);
@@ -94,9 +94,6 @@ export default function NewPaletteForm() {
         );
     });
 
-
-
-
     const handleDrawerOpen = () => {
         setOpen(true);
     };
@@ -105,11 +102,22 @@ export default function NewPaletteForm() {
         setOpen(false);
     };
 
+    const savePaletteHandler = () => {
+        const newPalette = {
+            paletteName: newColorName,
+            id: newColorName.toLowerCase().replace(/ /g, "-"),
+            colors: colors
+        }
+        props.savePalette(newPalette);
+        props.history.push("/");
+    }
+
     return (
         <div className={classes.root}>
             <CssBaseline />
             <AppBar
                 position="fixed"
+                color="default"
                 className={clsx(classes.appBar, {
                     [classes.appBarShift]: open,
                 })}
@@ -127,6 +135,13 @@ export default function NewPaletteForm() {
                     <Typography variant="h6" noWrap>
                         Persistent drawer
                     </Typography>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={savePaletteHandler}
+                    >
+                        SAVE PALETTE
+                    </Button>
                 </Toolbar>
             </AppBar>
             <Drawer

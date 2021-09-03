@@ -5,6 +5,7 @@ const styles = {
         display: "flex",
         alignItems: "flex-start",
         justifyContent: "center",
+        overflow: "auto",
     },
 
     container: {
