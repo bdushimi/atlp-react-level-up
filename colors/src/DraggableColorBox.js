@@ -6,10 +6,11 @@ const styles = {
         position: "relative",
         width: '20%',
         height: '25%',
+        margin: "0 auto",
         display: 'inline-block',
         padding: '10px',
         cursor: 'pointer',
-        marginButton: '-3.5px',
+        marginBottom: '-3.5px',
     },
 }
 
@@ -20,7 +21,7 @@ function DraggableColorBox(props) {
             className={props.classes.root}
             style={{ backgroundColor: props.color }}
         >
-            { props.color}
+            { props.name}
         </div>
     )
 }
