@@ -1,25 +1,8 @@
 import React from 'react';
-import {useQuery } from 'react-query';
-import axios from 'axios';
+import usePokemon from './Hooks/usePokemon';
 
 function App() {
-  const queryInfo = useQuery('pokemon', async () => {
-    // Make the api call wait for 2sec
-    // await new Promise(resolve => setTimeout(resolve, 2000))
-
-    // Trowing an error here
-    // if (true) {
-    //   throw new Error('Test error')
-    // }
-    return axios
-      .get('https://pokeapi.co/api/v2/pokemon')
-      .then(res => res.data.results)
-  }, {
-    refetchOnWindowFocus: true,
-    staleTime:2000
-  })
-  
-  
+  const queryInfo = usePokemon();
   return queryInfo.isLoading ?
     ('Loading.....')
     : queryInfo.isError ? queryInfo.error.message

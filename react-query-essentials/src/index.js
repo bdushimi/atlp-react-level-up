@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
+import Count from './Components/Count';
 import reportWebVitals from './reportWebVitals';
 import { QueryClientProvider, QueryClient } from 'react-query'
 import { ReactQueryDevtools} from 'react-query/devtools'
@@ -9,7 +10,8 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 const queryClient = new QueryClient()
 
 root.render(
-  <QueryClientProvider QueryClientProvider client = { queryClient }>
+  <QueryClientProvider QueryClientProvider client={queryClient}>
+    <Count />
     <App />
     <ReactQueryDevtools />
   </QueryClientProvider>
